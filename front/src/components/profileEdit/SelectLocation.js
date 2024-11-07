@@ -93,15 +93,15 @@ class SelectLocation extends Component {
   };
 
   fetchLocationDetails = (latitude, longitude) => {
-    fetch(`http://ip-api.com/json`)
+    fetch(`https://geolocation-db.com/json/`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.status === "success") {
+        if (data.city) {
           this._isMounted &&
             this.setState({
               city: data.city,
-              lat: data.lat,
-              long: data.lon,
+              lat: data.latitude,
+              long: data.longitude,
             });
         } else {
           ErrorToast.custom.error(
@@ -115,12 +115,12 @@ class SelectLocation extends Component {
         ErrorToast.custom.error("Couldn't fetch location details", 1400);
       });
   };
-
+  
   getCityFromLatLong = (lat, long) => {
-    fetch(`http://ip-api.com/json`)
+    fetch(`https://geolocation-db.com/json/`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.status === "success") {
+        if (data.city) {
           this._isMounted && this.setState({ city: data.city });
         } else {
           ErrorToast.custom.error(
@@ -133,17 +133,17 @@ class SelectLocation extends Component {
         console.error("Error fetching city from coordinates:", error);
       });
   };
-
+  
   getLatLongFromCity = (city) => {
-    fetch(`http://ip-api.com/json/${city}`)
+    fetch(`https://geolocation-db.com/json/`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.status === "success" && data.lat && data.lon) {
+        if (data.city === city && data.latitude && data.longitude) {
           this._isMounted &&
             this.setState({
               city: city,
-              lat: data.lat,
-              long: data.lon,
+              lat: data.latitude,
+              long: data.longitude,
             });
         } else {
           ErrorToast.custom.error("City not found, please try again...", 1400);
@@ -153,6 +153,8 @@ class SelectLocation extends Component {
         console.error("Error fetching lat/long from city:", error);
       });
   };
+  
+ 
 
   showEditLocation = () => {
     this._isMounted &&
@@ -218,7 +220,7 @@ class SelectLocation extends Component {
         </Button>
         {this.state.editLocationActive && (
           <div className="edit-location-input">
-            <div className="edit-location-autoc">
+            {/* <div className="edit-location-autoc">
               <Autocomplete
                 className="edit-location-autoc-input"
                 style={{ display: "inline-block" }}
@@ -242,8 +244,8 @@ class SelectLocation extends Component {
               >
                 Confirm
               </Button>
-            </div>
-            <p>Or</p>
+            </div> */}
+            <p></p>
             <Button
               variant="contained"
               color="secondary"

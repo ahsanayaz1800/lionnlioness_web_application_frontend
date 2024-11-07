@@ -17,8 +17,10 @@ class ConfirmAddr extends Component {
   componentDidMount() {
     let key = document.location.href;
     key = key.split("/");
+    console.log(key[key.length - 1])
     Axios.get(`${baseURL}/users/register/` + key[key.length - 1])
       .then(res => {
+        console.log(res)
         Materialize.toast({
           html: res.data["message"],
           displayLength: 5000,
@@ -27,6 +29,7 @@ class ConfirmAddr extends Component {
         this.props.history.push("/");
       })
       .catch(err => {
+        console.log(err)
         Materialize.toast({
           html: "An error has occurred",
           displayLength: 5000,

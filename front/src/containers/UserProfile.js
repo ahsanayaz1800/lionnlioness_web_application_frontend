@@ -40,6 +40,8 @@ import Female from "../assets/female.png";
 import io from "socket.io-client";
 import GetuserPost from "../components/post/GetuserPost";
 
+const baseURL = process.env.REACT_APP_BASE_URL
+
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -338,7 +340,7 @@ class UserProfile extends Component {
     if (this.props.userConnectedData.username !== username) {
       (await this._isMounted) &&
         this.setState({
-          socket: io({
+          socket: io(baseURL,{
             transports: ["polling"],
             requestTimeout: 50000,
             upgrade: false,

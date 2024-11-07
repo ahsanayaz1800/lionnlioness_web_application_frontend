@@ -306,15 +306,15 @@ errorPosition = error => {
 };
 
 fetchLocationDetails = (latitude, longitude) => {
-  // Example using IP-API to get location details
-  fetch(`http://ip-api.com/json`)
+  // Use geolocation-db API to get location details
+  fetch("https://geolocation-db.com/json")
     .then(response => response.json())
     .then(data => {
       const locationDetails = {
-        latitude: data.lat,
-        longitude: data.lon,
-        city: data.city,
-        country: data.country
+        latitude: data.latitude,
+        longitude: data.longitude,
+        city: data.city || "Unknown city",
+        country: data.country_name || "Unknown country"
       };
       this._isMounted && this.setState({ userLocation: locationDetails });
     })
@@ -322,6 +322,7 @@ fetchLocationDetails = (latitude, longitude) => {
       console.error("Error fetching location details:", error);
     });
 };
+
 
 getLocation = () => {
   navigator.geolocation.getCurrentPosition(

@@ -241,7 +241,7 @@ class HomeLogged extends Component {
       });
     this._isMounted &&
       this.setState({
-        socket: io({
+        socket: io(baseURL,{
           transports: ["polling"],
           requestTimeout: 50000,
           upgrade: false,

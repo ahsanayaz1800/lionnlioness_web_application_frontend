@@ -84,7 +84,7 @@ export default function MainRouter() {
           <Route exact path="/" component={App} />
           <Route path="/users/login" component={Login} />
           <Route path="/users/register" component={Register} />
-          <Route path="/users/register/:key" component={ConfirmAddr} />
+          <Route path="/users/register-activate/:key" component={ConfirmAddr} />
           <Route path="/users/forgot-password" component={ForgotPassword} />
           <Route path="/users/reset-password/:key" component={ResetPassword} />
           <Route path="/users/profile/:username" component={UserProfile} />

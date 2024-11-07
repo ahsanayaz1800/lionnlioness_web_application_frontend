@@ -64,7 +64,7 @@ class NavBar extends Component {
 
     this._isMounted &&
       (await this.setState({
-        socket: io({
+        socket: io(baseURL, {
           transports: ["polling"],
           requestTimeout: 50000,
           upgrade: false,

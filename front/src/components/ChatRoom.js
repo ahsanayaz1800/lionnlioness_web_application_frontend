@@ -225,7 +225,7 @@ handleSubmit = async (e) => {
 
     this._isMounted &&
       (await this.setState({
-        socket: io("/chat", {
+        socket: io(`${baseURL}/chat`, {
           transports: ["polling"],
           requestTimeout: 50000,
           upgrade: false,
