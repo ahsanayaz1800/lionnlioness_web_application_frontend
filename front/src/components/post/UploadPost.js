@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { uploadUserPost } from "../../http/index";
 import DeleteIcon from "@material-ui/icons/Delete";
 import InfoToastService from "../../services/InfoToastService";
+import Materialize from "materialize-css";
 
 const baseURL = process.env.REACT_APP_BASE_URL
 
@@ -120,6 +121,13 @@ class UploadPost extends Component {
         });
       }
     } catch (error) {
+      Materialize.toast({
+        html: "The image must be less than 2 mb",
+        displayLength: 1500,
+        classes: "rounded info-toast"
+      });
+           
+
       console.error("Error uploading post", error);
     }
   };

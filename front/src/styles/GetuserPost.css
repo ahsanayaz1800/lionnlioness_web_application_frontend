@@ -2,7 +2,7 @@
   margin-bottom: 20px;
 }
 .post-card-inner {
- position: relative;
+  position: relative;
 }
 .post-image {
   width: 100%;
@@ -10,7 +10,8 @@
   object-fit: cover;
 }
 
-.prev-button, .next-button {
+.prev-button,
+.next-button {
   position: absolute;
   top: 50%;
   color: white;
@@ -29,7 +30,7 @@
   margin-left: 8px;
 }
 
-.comments-container {
+/* .comments-container {
   height: 200px;
   overflow: hidden;
   position: relative;
@@ -38,8 +39,18 @@
 .comments-list {
   max-height: 100%;
   overflow-y: auto;
+} */
+.comments-container {
+  display: flex;
+  flex-direction: column-reverse; /* Reverses the order to show the latest comments at the bottom */
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: scroll;
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
 }
 
+.comments-container::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in Chrome, Safari, and Edge */
+}
 .comment-item {
   width: 100%;
 }
@@ -78,4 +89,23 @@
   margin-top: 30px;
   justify-content: center;
   font-size: 40px;
+}
+
+.no-posts-text {
+  text-align: center;
+  background-color: (48, 50, 49, 1);
+  font-size: 50px;
+  font-weight: bold;
+  color: #777;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.no-posts-div {
+  border-radius: 10px;
+  background-color: #303231;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }

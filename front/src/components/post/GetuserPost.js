@@ -25,7 +25,7 @@ const baseURL = process.env.REACT_APP_BASE_URL
 class GetuserPost extends Component {
   constructor(props) {
     super(props);
-    this.commentContainerRef = React.createRef(); // Create a ref for the comment container
+    
   }
 
   state = {
@@ -38,17 +38,7 @@ class GetuserPost extends Component {
     editedCommentText: "", // Store the text of the edited comment
   };
 
-  handleWheel = (event) => {
-    if (this.commentContainerRef.current) {
-      // Prevent the default scroll behavior
-      event.preventDefault();
-      // Scroll the container based on the wheel delta
-      this.commentContainerRef.current.scrollBy({
-        top: event.deltaY,
-        behavior: "smooth", // Smooth scrolling
-      });
-    }
-  };
+  
   componentDidMount() {
     this.fetchPosts();
   }
@@ -300,185 +290,197 @@ class GetuserPost extends Component {
 
     return (
       <div className="uploaded-post-wrapper">
-        {posts.map((post) => {
-          const totalImages = post.imagePaths ? post.imagePaths.length : 0;
-          const currentImageIndex = currentIndex[post.id] || 0;
-          const showNavigation = totalImages > 1;
+      {posts.length === 0 ? (
+        <div className="no-posts-div">
 
-         return (
-           <Card key={post.id} className="post-card">
-             <CardContent>
-               <Typography variant="h5">{post.Title}</Typography>
-               <Typography variant="subtitle1">
-                 Posted by: {post.username}
-               </Typography>
+        <Typography variant="h6" className="no-posts-text">
+          No posts yet...
+        </Typography>
 
-               {totalImages > 0 && (
-                 <div className="post-card-inner">
-                   <img
-                     src={`${baseURL}/uploads/${post.imagePaths[currentImageIndex]}`}
-                     alt="Post"
-                     className="post-image"
-                   />
+        </div>
+    ) : (
 
-                   {showNavigation && (
-                     <>
-                       <button
-                         onClick={() =>
-                           this.handlePrevImage(post.id, totalImages)
-                         }
-                         className="prev-button"
-                       >
-                         <ArrowBackIcon />
-                       </button>
-                       <button
-                         onClick={() =>
-                           this.handleNextImage(post.id, totalImages)
-                         }
-                         className="next-button"
-                       >
-                         <ArrowForwardIcon />
-                       </button>
-                     </>
-                   )}
-                 </div>
-               )}
-             </CardContent>
+      posts.map((post) => {
+        const totalImages = post.imagePaths ? post.imagePaths.length : 0;
+        const currentImageIndex = currentIndex[post.id] || 0;
+        const showNavigation = totalImages > 1;
 
-             <CardActions>
-               <IconButton onClick={() => this.handleLike(post.id)}>
-                 <FavoriteIcon color="error" />
-               </IconButton>
-               <Typography variant="body2" className="like-count">
-                 {postlike[post.id] ? postlike[post.id].likeCount : 0} Likes
-               </Typography>
+        return (
+          <Card key={post.id} className="post-card">
+            <CardContent>
+              <Typography variant="h5">{post.Title}</Typography>
+              <Typography variant="subtitle1">
+                Posted by: {post.username}
+              </Typography>
 
-               {this.props.user.id === this.props.userConnectedData.id && (
-                 <IconButton onClick={() => this.handleDelete(post.id)}>
-                   <DeleteIcon />
-                 </IconButton>
-               )}
-             </CardActions>
+              {totalImages > 0 && (
+                <div className="post-card-inner">
+                  <img
+                    src={`${baseURL}/uploads/${post.imagePaths[currentImageIndex]}`}
+                    alt="Post"
+                    className="post-image"
+                  />
 
-             <CardContent>
-               <TextField
-                 label="Comment"
-                 variant="outlined"
-                 fullWidth
-                 value={comments[post.id] || ""}
-                 onChange={(e) => this.handleComment(e, post.id)}
-               />
-               <Button
-                 variant="contained"
-                 color="primary"
-                 onClick={() => this.handleSubmitComment(post.id)}
-               >
-                 Submit Comment
-               </Button>
-               <div onWheel={this.handleWheel} className="comments-container">
-                 {Array.isArray(postComments[post.id]) &&
-                 postComments[post.id].length > 0 ? (
-                   <List
-                     ref={this.commentContainerRef}
-                     className="comments-list"
-                   >
-                     {postComments[post.id].map((comment) => (
-                       <ListItem key={comment.id}>
-                         <div className="comment-item">
-                           <div className="comment-header">
-                             <div>
-                               <img
-                                 src={comment.image}
-                                 alt="profile"
-                                 className="comment-profile-img"
-                               />
-                             </div>
+                  {showNavigation && (
+                    <>
+                      <button
+                        onClick={() =>
+                          this.handlePrevImage(post.id, totalImages)
+                        }
+                        className="prev-button"
+                      >
+                        <ArrowBackIcon />
+                      </button>
+                      <button
+                        onClick={() =>
+                          this.handleNextImage(post.id, totalImages)
+                        }
+                        className="next-button"
+                      >
+                        <ArrowForwardIcon />
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </CardContent>
 
-                             <ListItemText
-                               primary={comment.comment}
-                               secondary={`By: ${
-                                 comment.username
-                               } | On: ${new Date(
-                                 comment.created_at
-                               ).toLocaleString()}`}
-                               className="comment-text"
-                             />
-                             <div className="comment-actions">
-                               {comment.userid ===
-                               this.props.userConnectedData.id ? (
-                                 <>
-                                   <IconButton
-                                     onClick={() =>
-                                       this.handleEditComment(comment)
-                                     }
-                                   >
-                                     <EditIcon />
-                                   </IconButton>
-                                   <IconButton
-                                     onClick={() =>
-                                       this.handleDeleteComment(
-                                         comment.id,
-                                         post.id
-                                       )
-                                     }
-                                   >
-                                     <DeleteIcon />
-                                   </IconButton>
-                                 </>
-                               ) : (
-                                 <IconButton
-                                   onClick={() =>
-                                     this.handleDeleteComment(
-                                       comment.id,
-                                       post.id
-                                     )
-                                   }
-                                 >
-                                   <DeleteIcon />
-                                 </IconButton>
-                               )}
-                             </div>
-                           </div>
+            <CardActions>
+              <IconButton onClick={() => this.handleLike(post.id)}>
+                <FavoriteIcon color="error" />
+              </IconButton>
+              <Typography variant="body2" className="like-count">
+                {postlike[post.id] ? postlike[post.id].likeCount : 0} Likes
+              </Typography>
 
-                           {editingCommentId === comment.id && (
-                             <div className="edit-comment-section">
-                               <TextField
-                                 fullWidth
-                                 variant="outlined"
-                                 value={editedCommentText}
-                                 onChange={(e) =>
-                                   this.setState({
-                                     editedCommentText: e.target.value,
-                                   })
-                                 }
-                               />
-                               <Button
-                                 variant="contained"
-                                 color="primary"
-                                 onClick={() =>
-                                   this.handleSubmitEditComment(post.id)
-                                 }
-                               >
-                                 Save
-                               </Button>
-                             </div>
-                           )}
-                         </div>
-                       </ListItem>
-                     ))}
-                   </List>
-                 ) : (
-                   <Typography>
-                     <p className="no-comments-text" >No comments yet.</p>
-                   </Typography>
-                 )}
-               </div>
-             </CardContent>
-           </Card>
-         );
+              {this.props.user.id === this.props.userConnectedData.id && (
+                <IconButton onClick={() => this.handleDelete(post.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              )}
+            </CardActions>
 
-        })}
-      </div>
+            <CardContent>
+              <TextField
+                label="Comment"
+                variant="outlined"
+                fullWidth
+                value={comments[post.id] || ""}
+                onChange={(e) => this.handleComment(e, post.id)}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.handleSubmitComment(post.id)}
+              >
+                Submit Comment
+              </Button>
+              <div  className="comments-container">
+                {Array.isArray(postComments[post.id]) &&
+                postComments[post.id].length > 0 ? (
+                  <List
+                  >
+                    {postComments[post.id].map((comment) => (
+                      <ListItem key={comment.id}>
+                        <div className="comment-item">
+                          <div className="comment-header">
+                            <div>
+                              <img
+                                src={comment.image}
+                                alt="profile"
+                                className="comment-profile-img"
+                              />
+                            </div>
+
+                            <ListItemText
+                              primary={comment.comment}
+                              secondary={`By: ${
+                                comment.username
+                              } | On: ${new Date(
+                                comment.created_at
+                              ).toLocaleString()}`}
+                              className="comment-text"
+                            />
+                            <div className="comment-actions">
+                              {comment.userid ===
+                              this.props.userConnectedData.id ? (
+                                <>
+                                  <IconButton
+                                    onClick={() =>
+                                      this.handleEditComment(comment)
+                                    }
+                                  >
+                                    <EditIcon />
+                                  </IconButton>
+                                  <IconButton
+                                    onClick={() =>
+                                      this.handleDeleteComment(
+                                        comment.id,
+                                        post.id
+                                      )
+                                    }
+                                  >
+                                    <DeleteIcon />
+                                  </IconButton>
+                                </>
+                              ) : (
+                                post.userid ===
+                                  this.props.userConnectedData.id && (
+                                  <IconButton
+                                    onClick={() =>
+                                      this.handleDeleteComment(
+                                        comment.id,
+                                        post.id
+                                      )
+                                    }
+                                  >
+                                    <DeleteIcon />
+                                    
+                                  </IconButton>
+                                )
+                              )}
+                            </div>
+                          </div>
+
+                          {editingCommentId === comment.id && (
+                            <div className="edit-comment-section">
+                              <TextField
+                                fullWidth
+                                variant="outlined"
+                                value={editedCommentText}
+                                onChange={(e) =>
+                                  this.setState({
+                                    editedCommentText: e.target.value,
+                                  })
+                                }
+                              />
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() =>
+                                  this.handleSubmitEditComment(post.id)
+                                }
+                              >
+                                Save
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </ListItem>
+                    ))}
+                  </List>
+                ) : (
+                  <Typography>
+                    <p className="no-comments-text">No comments yet.</p>
+                  </Typography>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })
+    )};
+    </div>
     );
   }
 }

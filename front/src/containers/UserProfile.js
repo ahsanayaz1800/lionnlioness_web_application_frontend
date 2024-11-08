@@ -308,12 +308,15 @@ class UserProfile extends Component {
                 </div>
 
                 <div className="user-profile-posts">
-                {this.state.user.id == this.props.userConnectedData.id && (
-                  <UploadPosts user={this.state.user}/>
-                )}
-                  <GetuserPost user={this.state.user} />
-                
-                </div>
+                    {this.state.user.id === this.props.userConnectedData.id ? (
+                      <>
+                        <UploadPosts user={this.state.user} />
+                        <GetuserPost user={this.state.user} />
+                      </>
+                    ) : (
+                      <GetuserPost user={this.state.user} />
+                    )}
+                  </div>
                 </div>
 
 

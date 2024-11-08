@@ -246,13 +246,7 @@ class Register extends Component {
                 </div>
                 </form>
               </div>
-              <div class="form-seprator" bis_skin_checked="1">
-                            <span>or</span>
-                        </div>
-
-                        <button type="button" id="google-login-btn" class="login-with-google-btn">
-                                      <img src={GoogleIcon} />  Sign up with Google
-                                    </button>
+            
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-6 signup-form-img">

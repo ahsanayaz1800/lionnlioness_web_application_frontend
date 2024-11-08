@@ -4,6 +4,7 @@ import axios from "axios";
 import Materialize from "materialize-css";
 import ReactSelect from "react-select";
 import color from "@material-ui/core/colors/amber";
+import '../styles/App.css'
 // Options for each section
 const relationshipGoals = [
   { value: "Long-term partner", label: "Long-term partner" },

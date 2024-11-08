@@ -629,6 +629,12 @@ color: #fff;
   margin-right: 20px;
 }
 
+.login-google-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-with-google-btn,.nsm7Bb-HzV7m-LgbsSe {
   display: flex;
   align-items: center;
@@ -1109,6 +1115,7 @@ background-color: #000;
 .main-wrapper > .App  .blue-grey.card {
   background-color: #303231 !important;
   border-radius: 10px; 
+  width: unset !important;
 }
 
 .main-wrapper > .App  .card .card-action {
@@ -2622,7 +2629,7 @@ color: #fff !important;
 }
 
 .accordion-sidebar-wrapper .ant-collapse-content {
-background-color: #1C1C1C;
+background-color: #1C1C1C !important;
 }
 
 .accordion-sidebar-wrapper .ant-collapse-content-box > div > div{
@@ -2630,25 +2637,34 @@ background-color: #1C1C1C;
   color: #fff !important;
 }
 
-.accordion-sidebar-wrapper  :where(.css-dev-only-do-not-override-1hpnbz2).ant-collapse {
-  border: unset ;
+.accordion-sidebar-wrapper  .ant-collapse {
+  border: unset !important ;
 }
 
 .accordion-sidebar-wrapper .ant-collapse-expand-icon {
   display: none !important;
 }
 
-.accordion-sidebar-wrapper  :where(.css-dev-only-do-not-override-1hpnbz2).ant-collapse>.ant-collapse-item {
-  border-bottom: 1px solid #353535;
+.accordion-sidebar-wrapper   .ant-collapse>.ant-collapse-item {
+  border-bottom: 1px solid #353535 !important;
 }
 
 .accordion-sidebar-wrapper .ant-collapse-content-box option{
    color: #000 !important
 }
 
+
+.accordion-sidebar-wrapper .ant-collapse .ant-collapse-content{
+  border-color:  #353535 !important;
+}
+
+.dashboard-wrapper .main-wrapper > .App .blue-grey.card{
+  width: unset !important;
+}
+
 .sidebar-wrapper .delete-account-btn{
-  display: block;
-  margin: auto;
+  display: block !important;
+  margin: auto !important;
   border: unset !important;
   border-bottom: 1px solid #fff !important;
   border-radius: unset !important;
@@ -2657,30 +2673,30 @@ background-color: #1C1C1C;
   outline: unset !important;
   background-color: unset !important;
   color: #fff !important;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem !important ;
+  margin-bottom: 1rem !important;
   font-size: 13px !important;
 }
 
 .accordion-sidebar-wrapper {
-  background-color: #171717;
-  padding-bottom: 1rem;
-  font-size: 14px;
+  background-color: #171717 !important;
+  padding-bottom: 1rem !important;
+  font-size: 14px !important;
 }
 
 .accordion-save-btn {
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 16px !important;
+  padding-left: 16px !important;
 }
 
 .accordion-sidebar-wrapper .ant-btn.btn {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
 }
 
 .accordion-sidebar-wrapper :where(.css-dev-only-do-not-override-1hpnbz2).ant-collapse .ant-collapse-content {
-  border-top: unset ;
+  border-top: unset !important;
 }
 
 .followers-wrapper .makeStyles-root-51 {
@@ -2734,15 +2750,15 @@ background-color: #6B6B6B;
 }
 
 .accordion-save-btn .ant-btn {
-  width: 100%;
-  padding: 1rem 0;
-  height: unset;
-  line-height: unset;
+  width: 100% !important;
+  padding: 1rem 0 !important;
+  height: unset !important;
+  line-height: unset !important;
 }
 
 .posts-wrapper .upload-post-wrapper .post-title-box,
 .user-profile-wrapper .upload-post-wrapper .post-title-box {
-  margin-top: 1rem;
+  margin-top: 1rem !important;
 }
 
 .nav-wrapper .nav-buttons {
@@ -3885,4 +3901,13 @@ background-color: #000;
 .main-wrapper > .App::-webkit-scrollbar { /* WebKit */
   width: 0;
   height: 0;
+}
+
+.home-background {
+  background-image: unset !important;
+}
+@media screen and (max-width: 1000px) {
+  .home-background {
+    background-image: unset !important;
+  }
 }

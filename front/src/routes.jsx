@@ -24,6 +24,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Cards from "./containers/Cards";
 import SwipeCards from "./containers/CardMain";
+import HomePage from "./containers/Home/MainScreen";
 const SidebarLayout = ({ component: Component, ...rest }) => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [isMobileScreen, setMobileScreen] = useState(false);
@@ -92,6 +93,8 @@ export default function MainRouter() {
           <Route path="/chat/messages" component={Messages} />
           <Route path="/main/search" component={Search} />
           <Route path="/users/cards" component={SwipeCards} />
+          <Route path="/home" component={HomePage} />
+
 
 
           {/* Sidebar with Posts route */}

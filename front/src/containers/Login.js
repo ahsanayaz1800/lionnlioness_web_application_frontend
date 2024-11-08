@@ -223,6 +223,7 @@ class Login extends Component {
                             <span>or</span>
                         </div>
                         {/* Google login button */}
+                        <div class="login-google-wrapper">
                   <GoogleLogin
                   clientId='53925760279-cs8hnrbvmsmh1eur6f5ghjme5se9hamu.apps.googleusercontent.com' // Your Google Client ID
                   buttonText="Sign in with Google"
@@ -231,6 +232,7 @@ class Login extends Component {
                   cookiePolicy={'single_host_origin'}
                   id="google-login-btn" class="login-with-google-btn"
                 /> 
+                </div>
             </div>
           </div>
           </div>
