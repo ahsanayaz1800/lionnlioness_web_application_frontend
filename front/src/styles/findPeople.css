@@ -1,0 +1,72 @@
+.findPeopleDiv {
+    width: 100%;
+    background-color: black;
+    padding-top: 40px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 40px;
+  }
+  
+  .textDiv {
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+  }
+  
+  .textDiv h4 {
+    font-size: 24px;
+    color: white;
+  }
+  
+  .textDiv p {
+    color: white; /* Use the blue color similar to the image */
+    margin-top: 10px;
+  }
+  
+  .cardsDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: black;
+
+  }
+  
+  .cardRow1 {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+
+  }
+  .cardRow2 {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: black;
+
+  }
+  
+  .card {
+    width: 100%;
+    position: relative;
+        /* background-color: black; */
+
+  }
+  
+  /* .card img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    background-color: black;
+
+  }
+   */
+  .cardText {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
